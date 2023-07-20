@@ -11,10 +11,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy the project files to the container
 COPY . .
 
-
-
-# Install project dependencies
-RUN composer install 
+RUN apt-get update && apt-get install -y git
 
 
 # Generate the Laravel encryption key
