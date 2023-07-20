@@ -2,20 +2,30 @@ FROM php:8.2.8-apache
 # Set the working directory in the container
 WORKDIR /var/www/html
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql 
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy the project files to the container
-COPY . .
+COPY . /var/www/html
 
-RUN apt-get update && apt-get install -y git
+
 
 
 # Generate the Laravel encryption key
-RUN php artisan key:generate
+# RUN php artisan key:generate
 
 # Expose port 80 for the Apache server
 EXPOSE 80
