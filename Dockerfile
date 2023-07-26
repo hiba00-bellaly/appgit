@@ -24,8 +24,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Expose port 80 (you might need to expose port 443 for HTTPS if you are using it)
 EXPOSE 80
 
-# Start Nginx and PHP-FPM
-CMD ["nginx", "-g", "daemon off;", "php-fpm"]
-
 # Note: The above CMD may not work as expected, alternatively you can use the following:
-# CMD service nginx start && php-fpm
+CMD service nginx start && php-fpm
