@@ -1,5 +1,5 @@
 # Use the official Nginx image
-FROM nginx:latest
+FROM nginx:stable-alpine
 
 # Install PHP and related extensions for Laravel
 RUN apt-get update && apt-get install -y \
