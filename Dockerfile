@@ -21,9 +21,6 @@ COPY . .
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Generate the Laravel encryption key
-RUN php artisan key:generate
-
 # Expose port 80 (you might need to expose port 443 for HTTPS if you are using it)
 EXPOSE 80
 
