@@ -2,16 +2,8 @@
 FROM nginx:stable-alpine
 
 # Install PHP and related extensions for Laravel
-RUN apt-get update && apt-get install -y \
-    php7.4-fpm \
-    php7.4-mbstring \
-    php7.4-dom \
-    php7.4-pdo \
-    php7.4-mysql \
-    php7.4-gd \
-    php7.4-redis \
-    php7.4-zip \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y 
+   
 
 # Set the working directory in the container
 WORKDIR /var/www/html
