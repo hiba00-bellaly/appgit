@@ -1,5 +1,5 @@
 # Use the official Nginx image
-FROM nginx:stable-alpine
+FROM php:8.2.8-apache
 
 # Install PHP and related extensions for Laravel
 RUN docker-php-ext-install pdo_mysql 
@@ -22,9 +22,6 @@ RUN composer install
 
 # Generate the Laravel encryption key
 RUN php artisan key:generate
-
-# Expose port 80 for the Nginx server
-EXPOSE 80
 
 # Start PHP-FPM and Nginx
 CMD ["php-fpm7.4", "-R"] 
