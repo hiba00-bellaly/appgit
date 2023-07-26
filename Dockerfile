@@ -1,4 +1,4 @@
-# Use the official PHP with Apache image
+# Use the official PHP image
 FROM php:8.2.8-fpm
 
 # Install PHP and related extensions for Laravel
@@ -13,8 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /var/www/html
 
 # Copy Nginx server configuration
-COPY nginx/nginx.conf /etc/nginx/sites-available/default
-RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy Laravel project files to the container
 COPY . .
@@ -32,8 +31,7 @@ RUN php artisan key:generate
 EXPOSE 80
 
 # Start Nginx and PHP-FPM
-CMD service nginx start && php-fpm
+CMD ["nginx", "-g", "daemon off;", "&", "php-fpm"]
 
-# You can also use the following CMD to keep PHP-FPM and Nginx processes running separately.
-# CMD ["php-fpm"]
-# CMD ["nginx", "-g", "daemon off;"]
+# Note: The above CMD may not work as expected, alternatively you can use the following:
+# CMD service nginx start && php-fpm
