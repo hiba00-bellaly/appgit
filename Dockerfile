@@ -21,9 +21,6 @@ COPY . .
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install Laravel dependencies
-RUN composer install
-
 # Generate the Laravel encryption key
 RUN php artisan key:generate
 
